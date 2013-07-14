@@ -5,7 +5,7 @@
 -- License:     BSD3
 -- Maintainer:  Peter Trško <peter.trsko@gmail.com>
 -- Stability:   Provisional
--- Portability: non-portable (BangPatterns
+-- Portability: non-portable (BangPatterns)
 --
 -- ApacheMD5 is one of the hash algorithms used by Apache HTTP server for basic
 -- authentication. It is Apache specific, but e.g. nginx supports this
@@ -51,6 +51,7 @@ module Data.Digest.ApacheMD5
     , apacheMD5'
     , alpha64
     , encode64
+    , md5DigestLength
     )
   where
 
@@ -80,14 +81,17 @@ import Data.Digest.ApacheMD5.Internal (md5BS, md5DigestLength)
 apacheMD5 :: ByteString -> ByteString -> ByteString
 apacheMD5 = (encode64 .) . apacheMD5' md5BS
 
+-- | Raw Apache MD5 implementation that is parametrized by MD5 implementation
+-- and doesn't encode result in to base 64.
 apacheMD5'
     :: (ByteString -> ByteString)
+    -- ^ MD5 hash function.
     -> ByteString
     -- ^ Password
     -> ByteString
     -- ^ Salt
     -> ByteString
-    -- ^ Hash
+    -- ^ Apache MD5 Hash
 apacheMD5' md5 !password !salt = g . f . md5 $ password <> salt <> password
   where
     (<>) = BS.append
@@ -122,6 +126,7 @@ apacheMD5' md5 !password !salt = g . f . md5 $ password <> salt <> password
             <> (if i .&. 1 == 1  then digest   else password)
           | otherwise = digest
 
+-- | Alphabet used by 'encode64'.
 alpha64 :: ByteString
 alpha64 = C8.pack
     "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

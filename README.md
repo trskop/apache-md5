@@ -12,8 +12,8 @@ OpenSSL MD5.
 Installation
 ------------
 
-Requires OpenSSL library with header files. On Debian Linux it's provided by
-[`libssl-dev`][libssl-dev] package.
+Requires OpenSSL library with header files. On Debian and Ubuntu Linux it's
+provided by [`libssl-dev`][libssl-dev] package.
 
 After that just use [`cabal-install`][cabal-install] as you would normally do.
 For details see [HaskellWiki: How to install a Cabal package][].
@@ -22,8 +22,8 @@ For details see [HaskellWiki: How to install a Cabal package][].
 Unit Tests
 ----------
 
-Requires `htpasswd` command line utility installed. On Debian Linux it is
-provided by [`apache2-utils`][apache2-utils] package.
+Requires `htpasswd` command line utility installed. On Debian and Ubuntu Linux
+it is provided by [`apache2-utils`][apache2-utils] package.
 
 To run tests use command similar to this:
 
