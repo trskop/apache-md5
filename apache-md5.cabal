@@ -1,7 +1,6 @@
 name:                 apache-md5
 version:              0.5.0.0
-synopsis:
-  Apache HTTP server specific MD5 digest algorighm implementation.
+synopsis:             Apache server specific MD5 digest algorighm.
 description:
   Haskell implementation of Apache HTTP server specific MD5 digest algorithm
   that uses OpenSSL @MD5()@ function.
