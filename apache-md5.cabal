@@ -126,3 +126,8 @@ benchmark apache-md5-benchmark
 source-repository head
   type:                 git
   location:             git://github.com/trskop/apache-md5.git
+
+source-repository this
+  type:                 git
+  location:             git://github.com/trskop/apache-md5.git
+  tag:                  v0.5.0.0
