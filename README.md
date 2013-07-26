@@ -30,6 +30,12 @@ To run tests use command similar to this:
     cabal configure --enable-tests && cabal build && cabal test
 
 
+Contributions
+-------------
+
+Contributions, pull requests and bug reports are welcome!
+
+
 [libssl-dev]:
     http://packages.debian.org/lenny/libssl-dev
 [cabal-install]:
