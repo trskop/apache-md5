@@ -45,7 +45,9 @@ To run tests use command similar to this:
 Contributions
 -------------
 
-Contributions, pull requests and bug reports are welcome!
+Contributions, pull requests and bug reports are welcome! Please don't be
+afraid to contact author using GitHub or by e-mail (see `.cabal` file for
+that).
 
 
 [apt-get-howto]:
