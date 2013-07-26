@@ -73,7 +73,7 @@ main = do
         [userName, password] ->
             genSalt >>= C8.putStrLn . htpasswdEntry userName password
         _ -> do
-            hPutStrLn stderr $ "Usage: " ++ progName ++ "USER_NAME PASSWORD"
+            hPutStrLn stderr $ "Usage: " ++ progName ++ " USER_NAME PASSWORD"
             exitFailure
 ```
 
