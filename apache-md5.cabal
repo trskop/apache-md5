@@ -13,7 +13,9 @@ category:             Data, Cryptography
 build-Type:           Custom
 cabal-Version:        >= 1.9.1
   -- Benchmark section is available since Cabal >= 1.9.1
-extra-source-files:   README.md
+extra-source-files:
+    README.md
+  , example.hs
 
 
 flag pedantic

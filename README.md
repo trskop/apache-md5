@@ -9,6 +9,12 @@ Haskell implementation of Apache specific MD5 digest algorithm that uses
 OpenSSL MD5.
 
 
+Documentation
+-------------
+
+Stable releases with API documentation are available on [Hackage][].
+
+
 Installation
 ------------
 
@@ -23,6 +29,61 @@ Howto][apt-get-howto].
 
 After that just use [`cabal-install`][cabal-install] as you would normally do.
 For details see [HaskellWiki: How to install a Cabal package][].
+
+
+Example
+-------
+
+Create htpasswd like entry and print it to stdout:
+
+```Haskell
+module Main (main)
+    where
+
+import Control.Applicative ((<$>))
+import System.Environment (getArgs, getProgName)
+import System.Exit (exitFailure)
+import System.IO (hPutStrLn, stderr)
+
+import Control.Monad.Random (evalRandIO, getRandomRs)
+import Data.ByteString (ByteString)
+import qualified Data.ByteString as BS (index, pack)
+import qualified Data.ByteString.Char8 as C8 (concat, pack, putStrLn, singleton)
+import Data.Digest.ApacheMD5 (alpha64, apacheMD5)
+
+
+htpasswdEntry :: String -> String -> ByteString -> ByteString
+htpasswdEntry username password salt = C8.concat
+    [ C8.pack username
+    , C8.pack ":$apr1$"
+    , salt
+    , C8.singleton '$'
+    , apacheMD5 (C8.pack password) salt
+    ]
+
+genSalt :: IO ByteString
+genSalt = evalRandIO
+    $ BS.pack . map (BS.index alpha64) . take 8 <$> getRandomRs (0, 63)
+
+main :: IO ()
+main = do
+    args <- getArgs
+    progName <- getProgName
+    case args of
+        [userName, password] ->
+            genSalt >>= C8.putStrLn . htpasswdEntry userName password
+        _ -> do
+            hPutStrLn stderr $ "Usage: " ++ progName ++ "USER_NAME PASSWORD"
+            exitFailure
+```
+
+Compiling and running above example:
+
+    $ ghc -Wall example.hs
+    [1 of 1] Compiling Main             ( example.hs, example.o )
+    Linking example ...
+    $ ./example foo 123456
+    foo:$apr1$yM9AMlr2$EHssuHrqSAe8HPrAdN7HC/
 
 
 Unit Tests
@@ -56,6 +117,8 @@ that).
     http://packages.debian.org/lenny/libssl-dev
 [cabal-install]:
     http://haskell.org/haskellwiki/Cabal-Install
+[Hackage]:
+    http://hackage.haskell.org/package/apache-md5
 [HaskellWiki: How to install a Cabal package]:
     http://haskell.org/haskellwiki/Cabal/How_to_install_a_Cabal_package
 [apache2-utils]:
