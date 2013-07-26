@@ -48,7 +48,7 @@ Contributions
 Contributions, pull requests and bug reports are welcome!
 
 
-[apt-get-howto]
+[apt-get-howto]:
     https://help.ubuntu.com/community/AptGet/Howto
 [libssl-dev]:
     http://packages.debian.org/lenny/libssl-dev
