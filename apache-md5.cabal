@@ -6,7 +6,7 @@ description:
   that uses OpenSSL @MD5()@ function.
 license:              BSD3
 license-File:         LICENSE
-copyright:            2009, 2010, 2012, 2013 Peter Trško
+copyright:            (c) 2009, 2010, 2012, 2013 Peter Trško
 author:               Peter Trško <peter.trsko@gmail.com>
 maintainer:           peter.trsko@gmail.com
 category:             Data, Cryptography
@@ -95,24 +95,6 @@ benchmark apache-md5-benchmark
 
     , criterion
     , MonadRandom
-
-    -- Test dependencies:
-    , HUnit >= 1.2 && < 2
-      -- ^ Same constraints as test-framework-hunit
- -- , QuickCheck >= 2.4 && < 2.6
-      -- ^ Same constraints as test-framework-quickcheck2
-    , test-framework >= 0.8 && < 1
-      -- ^ Same constraint as test-framework-skip, other packages that
-      -- depend on it have less restrictive bounds.
-    , test-framework-hunit >= 0.2.6
-      -- ^ Lower versions have more restrictive bounds on test-framework.
- -- , test-framework-quickcheck2 >= 0.3
-      -- ^ There were changes in QuickCheck bounds in 0.2 branch and last one
-      -- on it had a compilation failure on Hackage.
-
-      -- Not required right now:
- -- , test-framework-skip == 1.*
-      -- ^ Currently there is only version 1.0.
 
   includes:             openssl/md5.h
   extra-libraries:      crypto
