@@ -14,7 +14,8 @@ build-Type:           Custom
 cabal-Version:        >= 1.9.1
   -- Benchmark section is available since Cabal >= 1.9.1
 extra-source-files:
-    README.md
+    ChangeLog.md
+  , README.md
   , example.hs
 
 
