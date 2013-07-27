@@ -2,7 +2,7 @@
 
 ## Version 0.5.0.0
 
-Release date: 2013-07-26 20:29:34 +0200
+Release date: **2013-07-26 20:29:34 +0200**
 
 * First public release.
 * Uploaded to [Hackage][]:
