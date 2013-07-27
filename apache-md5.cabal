@@ -11,6 +11,8 @@ description:
   .
   * <https://github.com/trskop/apache-md5/blob/master/ChangeLog.md>
 
+homepage:             https://github.com/trskop/apache-md5
+bug-reports:          https://github.com/trskop/apache-md5/issues
 license:              BSD3
 license-File:         LICENSE
 copyright:            (c) 2009, 2010, 2012, 2013 Peter Trško
