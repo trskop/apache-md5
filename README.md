@@ -46,9 +46,11 @@ import System.Exit (exitFailure)
 import System.IO (hPutStrLn, stderr)
 
 import Control.Monad.Random (evalRandIO, getRandomRs)
+    -- MonadRandom package http://hackage.haskell.org/package/MonadRandom/
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS (index, pack)
 import qualified Data.ByteString.Char8 as C8 (concat, pack, putStrLn, singleton)
+    -- bytestring package http://hackage.haskell.org/package/bytestring
 import Data.Digest.ApacheMD5 (alpha64, apacheMD5)
 
 
@@ -82,6 +84,8 @@ Compiling and running above example:
     $ ghc -Wall example.hs
     [1 of 1] Compiling Main             ( example.hs, example.o )
     Linking example ...
+    $ ./example
+    Usage: example USER_NAME PASSWORD
     $ ./example foo 123456
     foo:$apr1$yM9AMlr2$EHssuHrqSAe8HPrAdN7HC/
 

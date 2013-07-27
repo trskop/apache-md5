@@ -1,6 +1,6 @@
 -- |
 -- Module:       Main
--- Description:  Create htpasswd like entry and print it to stdout
+-- Description:  Create htpasswd like entry and print it to stdout.
 -- Copyright:    (c) 2013 Peter Trsko
 -- License:      BSD3
 --
@@ -8,7 +8,7 @@
 -- Stability:    stable
 -- Portability:  portable
 --
--- Create htpasswd like entry and print it to stdout
+-- Create htpasswd like entry and print it to stdout.
 module Main (main)
     where
 
@@ -18,9 +18,11 @@ import System.Exit (exitFailure)
 import System.IO (hPutStrLn, stderr)
 
 import Control.Monad.Random (evalRandIO, getRandomRs)
+    -- MonadRandom package http://hackage.haskell.org/package/MonadRandom/
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS (index, pack)
 import qualified Data.ByteString.Char8 as C8 (concat, pack, putStrLn, singleton)
+    -- bytestring package http://hackage.haskell.org/package/bytestring
 import Data.Digest.ApacheMD5 (alpha64, apacheMD5)
 
 
