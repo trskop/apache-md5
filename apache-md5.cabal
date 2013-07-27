@@ -4,6 +4,13 @@ synopsis:             Apache server specific MD5 digest algorighm.
 description:
   Haskell implementation of Apache HTTP server specific MD5 digest algorithm
   that uses OpenSSL @MD5()@ function.
+  .
+  README and ChangeLog can be found in source code package and on GitHub:
+  .
+  * <https://github.com/trskop/apache-md5/blob/master/README.md>
+  .
+  * <https://github.com/trskop/apache-md5/blob/master/ChangeLog.md>
+
 license:              BSD3
 license-File:         LICENSE
 copyright:            (c) 2009, 2010, 2012, 2013 Peter Trško
