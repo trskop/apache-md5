@@ -13,8 +13,8 @@ import Criterion.Main (bench, defaultMainWith, nf)
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Char8 as C8
 
-import Data.Digest.ApacheMD5 (alpha64, apacheMD5)
-import Data.Digest.ApacheMD5.Internal (Salt(Salt))
+import Data.Digest.ApacheMD5 (apacheMD5)
+import Data.Digest.ApacheMD5.Internal (Salt(Salt), alpha64)
 
 
 genSalt :: RandT StdGen IO Salt
