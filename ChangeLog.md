@@ -4,8 +4,14 @@
 
 * Introducing Salt newtype wrapper to guarantee that it consists of only
   characters that can be used in htpasswd entry.
-* Exposing `Data.Digest.ApacheMD5.Internal` module.
+* Algorithm implementation details and helper functions were all moved to
+  `Data.Digest.ApacheMD5.Internal` module to make it explicit that they aren't
+  part of stable API.
+* Exposing `Data.Digest.ApacheMD5.Internal` module so that library authors
+  still have the ability to get the most out of this package.
 * Updated `README.md`, `example.hs`, tests and benchmarks.
+* Uploaded to [Hackage][]:
+  <http://hackage.haskell.org/package/apache-md5-0.6.0.0>
 
 
 ## Version 0.5.0.1
