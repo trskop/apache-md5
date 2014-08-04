@@ -1,7 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 -- |
 -- Module:      Data.Digest.ApacheMD5
--- Copyright:   (c) 2009, 2010, 2012, 2013 Peter Trško
+-- Copyright:   (c) 2009, 2010, 2012 - 2014 Peter Trško
 -- License:     BSD3
 -- Maintainer:  Peter Trško <peter.trsko@gmail.com>
 -- Stability:   Provisional
@@ -35,13 +35,13 @@ module Data.Digest.ApacheMD5
     --
     -- > import Data.ByteString (ByteString)
     -- > import qualified Data.ByteString.Char8 as C8 (concat, pack, singleton)
-    -- > import Data.Digest.ApacheMD5 (apacheMD5)
+    -- > import Data.Digest.ApacheMD5 (Salt, apacheMD5, unSalt)
     -- >
-    -- > htpasswdEntry :: ByteString -> ByteString -> ByteString -> ByteString
+    -- > htpasswdEntry :: ByteString -> ByteString -> Salt -> ByteString
     -- > htpasswdEntry username password salt = C8.concat
     -- >     [ username
     -- >     , C8.pack ":$apr1$"
-    -- >     , salt
+    -- >     , unSalt salt
     -- >     , C8.singleton '$'
     -- >     , apacheMD5 password salt
     -- >     ]
@@ -49,18 +49,24 @@ module Data.Digest.ApacheMD5
     -- * API Documentation
       apacheMD5
     , apacheMD5'
+    , Salt
+    , mkSalt
+    , unSalt
     , alpha64
+    , isAlpha64
     , encode64
     , md5DigestLength
     )
   where
 
+import Control.Applicative (liftA2)
 import Data.Bits (Bits((.|.), (.&.), shiftL, shiftR))
 import Data.Word (Word8, Word16, Word32)
 
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
-    ( append
+    ( all
+    , append
     , concat
     , cons
     , empty
@@ -73,12 +79,29 @@ import qualified Data.ByteString as BS
     )
 import qualified Data.ByteString.Char8 as C8 (pack)
 
-import Data.Digest.ApacheMD5.Internal (md5BS, md5DigestLength)
+import Data.Digest.ApacheMD5.Internal (Salt(Salt), md5BS, md5DigestLength)
 
+
+type Password = ByteString
+
+-- | Smart constructor for 'Salt'. It tests all octets to be members of
+-- 'alpha64' by using 'isAlpha64' predicate.
+mkSalt :: ByteString -> Maybe Salt
+mkSalt str
+  | BS.all isAlpha64 str = Just $ Salt str
+  | otherwise            = Nothing
+
+-- | Unpack 'Salt' in to 'ByteString'.
+unSalt :: Salt -> ByteString
+unSalt (Salt str) = str
 
 -- | Taking password and salt this function produces resulting ApacheMD5 hash
 -- which is already base 64 encoded.
-apacheMD5 :: ByteString -> ByteString -> ByteString
+apacheMD5
+    :: Password
+    -> Salt
+    -> ByteString
+    -- ^ Apache MD5 Hash
 apacheMD5 = (encode64 .) . apacheMD5' md5BS
 
 -- | Raw Apache MD5 implementation that is parametrized by MD5 implementation
@@ -86,13 +109,12 @@ apacheMD5 = (encode64 .) . apacheMD5' md5BS
 apacheMD5'
     :: (ByteString -> ByteString)
     -- ^ MD5 hash function.
-    -> ByteString
-    -- ^ Password
-    -> ByteString
-    -- ^ Salt
+    -> Password
+    -> Salt
     -> ByteString
     -- ^ Apache MD5 Hash
-apacheMD5' md5 !password !salt = g . f . md5 $ password <> salt <> password
+apacheMD5' md5 !password (Salt !salt) =
+    g . f . md5 $ password <> salt <> password
   where
     (<>) = BS.append
 
@@ -108,9 +130,9 @@ apacheMD5' md5 !password !salt = g . f . md5 $ password <> salt <> password
 
         f' :: Word8 -> Int -> ByteString
         f' !pwhead !i
-            | i == 0    = BS.empty
-            | otherwise = (if i .&. 1 == 1 then 0 else pwhead)
-                `BS.cons` f' pwhead (i `shiftR` 1)
+          | i == 0    = BS.empty
+          | otherwise = (if i .&. 1 == 1 then 0 else pwhead)
+            `BS.cons` f' pwhead (i `shiftR` 1)
 
     g :: ByteString -> ByteString
     g = g' 0
@@ -130,6 +152,22 @@ apacheMD5' md5 !password !salt = g . f . md5 $ password <> salt <> password
 alpha64 :: ByteString
 alpha64 = C8.pack
     "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+-- | Check if specified 8 bit word is a valid member of 'alpha64'.
+isAlpha64 :: Word8 -> Bool
+isAlpha64 = ((>= dot) <&&> (<= _9))
+    <||> ((>= _A) <&&> (<= _Z))
+    <||> ((>= _a) <&&> (<= _z))
+  where
+    (<&&>) = liftA2 (&&)
+    (<||>) = liftA2 (||)
+
+    dot = 46 -- '.'
+    _9 = 57  -- '9'
+    _A = 65  -- 'A'
+    _Z = 90  -- 'Z'
+    _a = 97  -- 'a'
+    _z = 122 -- 'z'
 
 encode64 :: ByteString -> ByteString
 encode64 str = BS.pack $ concatMap (encode64' str)

@@ -3,29 +3,34 @@ module Main
     where
 
 import Control.Applicative  ((<$>))
-import Control.Arrow ((***), first)
 import Control.Monad (replicateM)
-import Data.Word (Word8)
+
+import Data.ByteString (ByteString)
 
 import Control.Monad.Random
-import Criterion.Main
+import Criterion.Config (Config(cfgPerformGC), defaultConfig, ljust)
+import Criterion.Main (bench, defaultMainWith, nf)
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Char8 as C8
 
 import Data.Digest.ApacheMD5 (alpha64, apacheMD5)
+import Data.Digest.ApacheMD5.Internal (Salt(Salt))
 
 
-genSalt :: RandT StdGen IO [Word8]
-genSalt = replicateM 8 $ BS.index alpha64 <$> getRandomR (0, 63)
+genSalt :: RandT StdGen IO Salt
+genSalt = Salt . BS.pack
+    <$> replicateM 8 (BS.index alpha64 <$> getRandomR (0, 63))
+    -- We know, that salt will be correct since we generate it out of
+    -- alpha64, therefore we don't use mkSalt to check it for us.
 
 genPassword :: Int -> RandT StdGen IO String
 genPassword len = replicateM len (getRandomR ('!', '~'))
 
-genData :: Int -> RandT StdGen IO ([Word8], String)
+genData :: Int -> RandT StdGen IO (ByteString, Salt)
 genData len = do
     s <- genSalt
-    p <- genPassword len
-    return (s, p)
+    p <- C8.pack <$> genPassword len
+    return (p, s)
 
 main :: IO ()
 main = do
@@ -35,17 +40,17 @@ main = do
     (!inputData64, _) <- genData' 64
     (!inputData128, _) <- genData' 128
     (!inputData256, _) <- genData' 256
+    (!inputData512, _) <- genData' 512
 
-    defaultMain
+    defaultMainWith defaultConfig{cfgPerformGC = ljust True} (return ())
         [ bench "Random passwords of length 8" $ test inputData8
         , bench "Random passwords of length 16" $ test inputData16
         , bench "Random passwords of length 32" $ test inputData32
         , bench "Random passwords of length 64" $ test inputData64
         , bench "Random passwords of length 128" $ test inputData128
         , bench "Random passwords of length 256" $ test inputData256
+        , bench "Random passwords of length 512" $ test inputData512
         ]
   where
     test = nf $ uncurry apacheMD5
-
-    genData' n = getStdGen
-        >>= (first (BS.pack *** C8.pack) <$>) . runRandT (genData n)
+    genData' n = getStdGen >>= runRandT (genData n)

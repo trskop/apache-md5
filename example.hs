@@ -1,7 +1,7 @@
 -- |
 -- Module:       Main
 -- Description:  Create htpasswd like entry and print it to stdout.
--- Copyright:    (c) 2013 Peter Trsko
+-- Copyright:    (c) 2013, 2014 Peter Trsko
 -- License:      BSD3
 --
 -- Maintainer:   peter.trsko@gmail.com
@@ -23,21 +23,28 @@ import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS (index, pack)
 import qualified Data.ByteString.Char8 as C8 (concat, pack, putStrLn, singleton)
     -- bytestring package http://hackage.haskell.org/package/bytestring
-import Data.Digest.ApacheMD5 (alpha64, apacheMD5)
+import Data.Digest.ApacheMD5 (Salt, alpha64, apacheMD5, mkSalt, unSalt)
 
 
-htpasswdEntry :: String -> String -> ByteString -> ByteString
+htpasswdEntry :: String -> String -> Salt -> ByteString
 htpasswdEntry username password salt = C8.concat
     [ C8.pack username
     , C8.pack ":$apr1$"
-    , salt
+    , unSalt salt
     , C8.singleton '$'
     , apacheMD5 (C8.pack password) salt
     ]
 
-genSalt :: IO ByteString
-genSalt = evalRandIO
-    $ BS.pack . map (BS.index alpha64) . take 8 <$> getRandomRs (0, 63)
+genSalt :: IO Salt
+genSalt = do
+    Just s <- evalRandIO $ mkSalt . BS.pack . map (BS.index alpha64) . take 8
+        <$> getRandomRs (0, 63)
+        -- We know that Salt is correctly generated, since we use alpha64 to do
+        -- it. That is the reason why we can pattern match on Just.
+        --
+        -- Other option would be to use Salt value constructor from
+        -- Data.Digest.ApacheMD5.Internal module.
+    return s
 
 main :: IO ()
 main = do

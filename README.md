@@ -51,21 +51,28 @@ import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS (index, pack)
 import qualified Data.ByteString.Char8 as C8 (concat, pack, putStrLn, singleton)
     -- bytestring package http://hackage.haskell.org/package/bytestring
-import Data.Digest.ApacheMD5 (alpha64, apacheMD5)
+import Data.Digest.ApacheMD5 (Salt, alpha64, apacheMD5, mkSalt, unSalt)
 
 
-htpasswdEntry :: String -> String -> ByteString -> ByteString
+htpasswdEntry :: String -> String -> Salt -> ByteString
 htpasswdEntry username password salt = C8.concat
     [ C8.pack username
     , C8.pack ":$apr1$"
-    , salt
+    , unSalt salt
     , C8.singleton '$'
     , apacheMD5 (C8.pack password) salt
     ]
 
-genSalt :: IO ByteString
-genSalt = evalRandIO
-    $ BS.pack . map (BS.index alpha64) . take 8 <$> getRandomRs (0, 63)
+genSalt :: IO Salt
+genSalt = do
+    Just s <- evalRandIO $ mkSalt . BS.pack . map (BS.index alpha64) . take 8
+        <$> getRandomRs (0, 63)
+        -- We know that Salt is correctly generated, since we use alpha64 to do
+        -- it. That is the reason why we can pattern match on Just.
+        --
+        -- Other option would be to use Salt value constructor from
+        -- Data.Digest.ApacheMD5.Internal module.
+    return s
 
 main :: IO ()
 main = do
@@ -107,6 +114,22 @@ To run tests use command similar to this:
     $ cabal configure --enable-tests && cabal build && cabal test
 
 
+Benchmarks
+----------
+
+This package provides [Criterion][] benchmarks, to run them you can use
+something like:
+
+    $ cabal configure --enable-benchmarks && cabal build && cabal bench
+
+To generate HTML output one needs to specify output file. Then the last
+command in above chain would look like:
+
+    $ cabal bench --benchmark-option=--output=benchmarks.html
+
+Where `benchmarks.html` is the name of [Criterion][] generated HTML file.
+
+
 Contributions
 -------------
 
@@ -121,6 +144,8 @@ that).
     http://packages.debian.org/lenny/libssl-dev
 [cabal-install]:
     http://haskell.org/haskellwiki/Cabal-Install
+[Criterion]:
+    http://hackage.haskell.org/package/criterion
 [Hackage]:
     http://hackage.haskell.org/package/apache-md5
 [HaskellWiki: How to install a Cabal package]:

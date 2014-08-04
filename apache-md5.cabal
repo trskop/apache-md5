@@ -1,5 +1,5 @@
 name:                 apache-md5
-version:              0.5.0.1
+version:              0.6.0.0
 synopsis:             Apache specific MD5 digest algorighm.
 description:
   Haskell implementation of Apache HTTP server specific MD5 digest algorithm
@@ -15,7 +15,7 @@ homepage:             https://github.com/trskop/apache-md5
 bug-reports:          https://github.com/trskop/apache-md5/issues
 license:              BSD3
 license-File:         LICENSE
-copyright:            (c) 2009, 2010, 2012, 2013 Peter Trško
+copyright:            (c) 2009, 2010, 2012 - 2014 Peter Trško
 author:               Peter Trško <peter.trsko@gmail.com>
 maintainer:           peter.trsko@gmail.com
 category:             Data, Cryptography
@@ -33,15 +33,28 @@ flag pedantic
     Pass additional warning flags including -Werror to GHC during compilation.
   default:            False
 
+flag deepseq
+  description:
+    Define instance of NFData for Salt newtype. This dependency is enforced for
+    benchmark.
+  default:            False
+
 library
   hs-Source-Dirs:       src
-  exposed-Modules:      Data.Digest.ApacheMD5
-  other-Modules:        Data.Digest.ApacheMD5.Internal
-  build-Depends:
+  exposed-modules:
+      Data.Digest.ApacheMD5
+    , Data.Digest.ApacheMD5.Internal
+  build-depends:
       base >= 4 && < 5
     , bytestring >= 0.10 && < 0.11
+
+  if flag(deepseq)
+    cpp-options:        -DWITH_deepseq
+    build-depends:      deepseq >= 1.1.0.0
+    -- Same minimal bound as criterion has since version 0.4.0.
+
   includes:             openssl/md5.h
-  extra-Libraries:      crypto
+  extra-libraries:      crypto
 
   ghc-options:          -Wall
   if impl(ghc >= 6.8)
@@ -106,11 +119,14 @@ benchmark apache-md5-benchmark
     , bytestring >= 0.10 && < 0.11
 
     , criterion
+    , deepseq >= 1.1.0.0
+    -- Same minimal bound as criterion has since version 0.4.0.
     , MonadRandom
 
   includes:             openssl/md5.h
   extra-libraries:      crypto
 
+  cpp-options:          -DWITH_deepseq
   ghc-options:          -Wall
   if impl(ghc >= 6.8)
     ghc-options:        -fwarn-tabs
@@ -124,4 +140,4 @@ source-repository head
 source-repository this
   type:                 git
   location:             git://github.com/trskop/apache-md5.git
-  tag:                  v0.5.0.1
+  tag:                  v0.6.0.0

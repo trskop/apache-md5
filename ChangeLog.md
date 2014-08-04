@@ -1,5 +1,12 @@
 # ChangeLog / ReleaseNotes
 
+## Version 0.6.0.0
+
+* Introducing Salt newtype wrapper to guarantee that it consists of only
+  characters that can be used in htpasswd entry.
+* Exposing `Data.Digest.ApacheMD5.Internal` module.
+* Updated `README.md`, `example.hs`, tests and benchmarks.
+
 
 ## Version 0.5.0.1
 
