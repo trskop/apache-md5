@@ -12,6 +12,7 @@
 #endif
 
 {-# LANGUAGE ForeignFunctionInterface #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 
 -- |
 -- Module:      Data.Digest.ApacheMD5.Internal
@@ -20,7 +21,7 @@
 -- Maintainer:  Peter Trško <peter.trsko@gmail.com>
 -- Stability:   Provisional
 -- Portability: non-portable (BangPatterns, CPP, DeriveDataTypeable,
---              DeriveGeneric, ForeignFunctionInterface)
+--              DeriveGeneric, ForeignFunctionInterface, NoImplicitPrelude)
 --
 -- Internal and unsafe functions used for implementing Apache MD5
 -- hash algorithm.
@@ -47,12 +48,27 @@ module Data.Digest.ApacheMD5.Internal
     )
   where
 
+import Prelude
+    ( Integral(div, mod, rem, toInteger)
+    , Num((+), fromInteger)
+    , Read
+    , Show
+    , fromIntegral
+    )
+
 import Control.Applicative (liftA2)
 import Control.Monad (void)
 import Data.Bits (Bits((.|.), (.&.), shiftL, shiftR))
+import Data.Bool (Bool, (||), (&&), otherwise)
+import Data.Eq (Eq((==)))
+import Data.Function ((.), ($))
+import Data.Int (Int)
+import Data.List (concatMap, foldl1, iterate, map, replicate, take)
+import Data.Ord (Ord((<), (<=), (>), (>=)))
 import Data.Word (Word8, Word16, Word32)
 import Foreign (Ptr)
 import Foreign.C.Types (CChar(..), CULong(..))
+import System.IO (IO)
 import System.IO.Unsafe (unsafePerformIO)
 
 #ifdef WITH_deepseq
@@ -91,7 +107,7 @@ type Password = ByteString
 
 -- | Apache MD5 hash salt. When constructing @.htpasswd@ file it is necessary
 -- for the salt to be consisting of octets from 'alpha64' \"set\". This newtype
--- along with 'mkSalt' smart constructor are here to ensure such invariant.
+-- along with @mkSalt@ smart constructor are here to ensure such invariant.
 newtype Salt = Salt ByteString
   deriving
     ( Eq, Ord, Read, Show

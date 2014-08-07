@@ -1,13 +1,27 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module Main (main)
     where
 
+import Prelude (Show(show), error)
+
 import Control.Arrow (Arrow(second))
-import Control.Monad (replicateM, replicateM_, void, when)
+import Control.Monad
+    ( Monad((>>=), return)
+    , replicateM
+    , replicateM_
+    , void
+    , when
+    )
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Random
 import qualified Data.ByteString.Char8 as C8
-import Data.Function (on)
+import Data.Eq (Eq((==), (/=)))
+import Data.Function ((.), ($), on)
+import Data.Int (Int)
+import Data.List ((++), break, concat, drop, dropWhile, takeWhile, unlines)
+import Data.String (String)
 import System.Exit (ExitCode(..))
+import System.IO (IO)
 import System.Process (readProcessWithExitCode)
 import Test.Framework
 import Test.Framework.Providers.HUnit (testCase)

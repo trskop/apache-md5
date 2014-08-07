@@ -1,10 +1,12 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 -- |
 -- Module:      Data.Digest.ApacheMD5
 -- Copyright:   (c) 2009, 2010, 2012 - 2014 Peter Trško
 -- License:     BSD3
 -- Maintainer:  Peter Trško <peter.trsko@gmail.com>
 -- Stability:   Provisional
--- Portability: non-portable (depends on non-portable internal module)
+-- Portability: non-portable (NoImplicitPrelude, depends on non-portable
+--              internal module)
 --
 -- ApacheMD5 is one of the hash algorithms used by Apache HTTP server for basic
 -- authentication. It is Apache specific, but e.g. nginx supports this
@@ -53,6 +55,10 @@ module Data.Digest.ApacheMD5
     , unSalt
     )
   where
+
+import Data.Bool (otherwise)
+import Data.Function ((.), ($))
+import Data.Maybe (Maybe(Nothing, Just))
 
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS (all)

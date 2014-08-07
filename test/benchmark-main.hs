@@ -1,9 +1,16 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module Main
     where
 
-import Control.Applicative  ((<$>))
-import Control.Monad (replicateM)
+import Control.Applicative ((<$>))
+import Control.Monad (Monad((>>=), return), replicateM)
+import Data.Bool (Bool(True))
+import Data.Function ((.), ($))
+import Data.Int (Int)
+import Data.String (String)
+import Data.Tuple (uncurry)
+import System.IO (IO)
 
 import Data.ByteString (ByteString)
 
