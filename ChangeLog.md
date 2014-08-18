@@ -1,5 +1,13 @@
 # ChangeLog / ReleaseNotes
 
+
+## Version 0.6.1.0
+
+* Using `NoImplicitPrelude` language extension.
+* Example program is once again compilable.
+* Minor documentation updates including `README.md`.
+
+
 ## Version 0.6.0.0
 
 * Introducing Salt newtype wrapper to guarantee that it consists of only
