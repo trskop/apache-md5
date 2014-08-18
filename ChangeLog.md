@@ -7,6 +7,8 @@
 * Using `NoImplicitPrelude` language extension.
 * Example program is once again compilable.
 * Minor documentation updates including `README.md`.
+* Uploaded to [Hackage][]:
+  <http://hackage.haskell.org/package/apache-md5-0.6.1.0>
 
 
 ## Version 0.6.0.0
