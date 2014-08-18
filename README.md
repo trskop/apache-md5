@@ -51,7 +51,8 @@ import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS (index, pack)
 import qualified Data.ByteString.Char8 as C8 (concat, pack, putStrLn, singleton)
     -- bytestring package http://hackage.haskell.org/package/bytestring
-import Data.Digest.ApacheMD5 (Salt, alpha64, apacheMD5, mkSalt, unSalt)
+import Data.Digest.ApacheMD5 (Salt, apacheMD5, mkSalt, unSalt)
+import Data.Digest.ApacheMD5.Internal (alpha64)
 
 
 htpasswdEntry :: String -> String -> Salt -> ByteString
