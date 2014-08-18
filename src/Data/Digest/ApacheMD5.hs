@@ -56,12 +56,12 @@ module Data.Digest.ApacheMD5
     )
   where
 
-import Data.Bool (otherwise)
+import Data.Bool ((&&), not, otherwise)
 import Data.Function ((.), ($))
 import Data.Maybe (Maybe(Nothing, Just))
 
 import Data.ByteString (ByteString)
-import qualified Data.ByteString as BS (all)
+import qualified Data.ByteString as BS (all, null)
 
 import Data.Digest.ApacheMD5.Internal (Password, Salt(Salt))
 import qualified Data.Digest.ApacheMD5.Internal as Internal
@@ -72,13 +72,16 @@ import qualified Data.Digest.ApacheMD5.Internal as Internal
     )
 
 
--- | Smart constructor for 'Salt'. It tests all octets to be members of
--- 'Data.Digest.ApacheMD5.Internal.alpha64' by using 'Internal.isAlpha64'
--- predicate.
+-- | Smart constructor for 'Salt'. It tests that provided 'ByteString' is not
+-- empty and that all its octets are members of alphabet used for base 64
+-- encoding 'Data.Digest.ApacheMD5.Internal.alpha64' and it uses
+-- 'Internal.isAlpha64' predicate to do so.
 mkSalt :: ByteString -> Maybe Salt
 mkSalt str
-  | BS.all Internal.isAlpha64 str = Just $ Salt str
-  | otherwise                     = Nothing
+  | isValidSalt = Just $ Salt str
+  | otherwise   = Nothing
+  where
+    isValidSalt = not (BS.null str) && BS.all Internal.isAlpha64 str
 
 -- | Unpack 'Salt' in to 'ByteString'.
 unSalt :: Salt -> ByteString

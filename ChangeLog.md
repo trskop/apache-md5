@@ -3,6 +3,7 @@
 
 ## Version 0.6.1.0
 
+* Function `mkSalt` rejects empty `ByteString` and returns `Nothing` for it.
 * Using `NoImplicitPrelude` language extension.
 * Example program is once again compilable.
 * Minor documentation updates including `README.md`.
