@@ -29,10 +29,10 @@ module Data.Digest.ApacheMD5
     -- usage.  See also @htpasswd@ documentation on
     -- <http://httpd.apache.org/docs/current/programs/htpasswd.html>.
 
-    -- ** Example: Creating htpasswd-like entry
+    -- * Example: Creating htpasswd-like entry
     --
-    -- | Output of this function is not identical to what @htpasswd@ does.  To
-    -- create @htpasswd@-like entry do:
+    -- | Output of 'apacheMD5' function is not identical to what @htpasswd@
+    -- does.  To create @htpasswd@-like entry one needs to do:
     --
     -- > import Data.ByteString (ByteString)
     -- > import qualified Data.ByteString.Char8 as C8 (concat, pack, singleton)
