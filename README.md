@@ -139,10 +139,10 @@ afraid to contact author using GitHub or by e-mail (see `.cabal` file for
 that).
 
 
+[apache2-utils]:
+    http://packages.debian.org/stable/apache2-utils
 [apt-get-howto]:
     https://help.ubuntu.com/community/AptGet/Howto
-[libssl-dev]:
-    http://packages.debian.org/lenny/libssl-dev
 [cabal-install]:
     http://haskell.org/haskellwiki/Cabal-Install
 [Criterion]:
@@ -151,5 +151,5 @@ that).
     http://hackage.haskell.org/package/apache-md5
 [HaskellWiki: How to install a Cabal package]:
     http://haskell.org/haskellwiki/Cabal/How_to_install_a_Cabal_package
-[apache2-utils]:
-    http://packages.debian.org/stable/apache2-utils
+[libssl-dev]:
+    http://packages.debian.org/lenny/libssl-dev
