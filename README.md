@@ -1,6 +1,8 @@
 Apache MD5
 ==========
 
+[![Hackage](http://img.shields.io/hackage/v/apache-md5.svg)][Hackage: apache-md5]
+
 
 Description
 -----------
@@ -12,7 +14,8 @@ OpenSSL MD5.
 Documentation
 -------------
 
-Stable releases with API documentation are available on [Hackage][].
+Stable releases with API documentation are available on
+[Hackage][Hackage: apache-md5].
 
 
 Installation
@@ -147,7 +150,7 @@ that).
     http://haskell.org/haskellwiki/Cabal-Install
 [Criterion]:
     http://hackage.haskell.org/package/criterion
-[Hackage]:
+[Hackage: apache-md5]:
     http://hackage.haskell.org/package/apache-md5
 [HaskellWiki: How to install a Cabal package]:
     http://haskell.org/haskellwiki/Cabal/How_to_install_a_Cabal_package
