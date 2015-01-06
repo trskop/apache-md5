@@ -64,7 +64,7 @@ import Data.Eq (Eq((==)))
 import Data.Function ((.), ($))
 import Data.Int (Int)
 import Data.List (concatMap, foldl1, iterate, map, replicate, take)
-import Data.Ord (Ord((<), (<=), (>), (>=)))
+import Data.Ord (Ord((<=), (>), (>=)))
 import Data.Word (Word8, Word16, Word32)
 import Foreign (Ptr)
 import Foreign.C.Types (CChar(..), CULong(..))
@@ -164,12 +164,12 @@ apacheMD5 md5 !password (Salt !salt) =
         -- 999.
         g' :: Word16 -> ByteString -> ByteString
         g' !i !digest
-          | i < 1000 = g' (i + 1) . md5
+          | i >= 1000 = digest
+          | otherwise = g' (i + 1) . md5
             $  (if i .&. 1 == 1  then password else digest)
             <> (if i `mod` 3 > 0 then salt     else BS.empty)
             <> (if i `mod` 7 > 0 then password else BS.empty)
             <> (if i .&. 1 == 1  then digest   else password)
-          | otherwise = digest
 
 -- | Alphabet used by 'encode64'.
 alpha64 :: ByteString
