@@ -1,6 +1,17 @@
 # ChangeLog / ReleaseNotes
 
 
+## Version 0.6.1.1
+
+* Cleanup of version dependencies, most importantly:
+    * Bumped transformers dependency from `< 0.4` to `0.5`.
+    * Bumped criterion minimal version to 1.0.0.0. This required update of
+      benchmarking code.
+* Documentation updates.
+* Uploaded to [Hackage][]:
+  <http://hackage.haskell.org/package/apache-md5-0.6.1.1>
+
+
 ## Version 0.6.1.0
 
 * Function `mkSalt` rejects empty `ByteString` and returns `Nothing` for it.
