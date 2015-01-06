@@ -12,7 +12,7 @@ homepage:             https://github.com/trskop/apache-md5
 bug-reports:          https://github.com/trskop/apache-md5/issues
 license:              BSD3
 license-File:         LICENSE
-copyright:            (c) 2009, 2010, 2012 - 2014 Peter Trško
+copyright:            (c) 2009, 2010, 2012-2015 Peter Trško
 author:               Peter Trško <peter.trsko@gmail.com>
 maintainer:           peter.trsko@gmail.com
 category:             Data, Cryptography
