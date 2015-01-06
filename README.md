@@ -1,27 +1,24 @@
-Apache MD5
-==========
+# Apache MD5
 
 [![Hackage](http://img.shields.io/hackage/v/apache-md5.svg)][Hackage: apache-md5]
 [![Haskell Programming Language](https://img.shields.io/badge/language-Haskell-blue.svg)][Haskell.org]
 [![BSD3 License](http://img.shields.io/badge/license-BSD3-brightgreen.svg)][tl;dr Legal: BSD3]
 
 
-Description
------------
+
+## Description
 
 Haskell implementation of Apache specific MD5 digest algorithm that uses
 OpenSSL MD5.
 
 
-Documentation
--------------
+## Documentation
 
 Stable releases with API documentation are available on
 [Hackage][Hackage: apache-md5].
 
 
-Installation
-------------
+## Installation
 
 Requires OpenSSL library with header files. On Debian and Ubuntu Linux it's
 provided by [`libssl-dev`][libssl-dev] package that can be installed using
@@ -36,8 +33,14 @@ After that just use [`cabal-install`][cabal-install] as you would normally do.
 For details see [HaskellWiki: How to install a Cabal package][].
 
 
-Example
--------
+### Building Options
+
+* `-fpedantic` (disabled by default)
+
+  Pass additional warning flags to GHC.
+
+
+## Example
 
 Create htpasswd like entry and print it to stdout:
 
@@ -103,8 +106,7 @@ Compiling and running above example:
     foo:$apr1$yM9AMlr2$EHssuHrqSAe8HPrAdN7HC/
 
 
-Unit Tests
-----------
+## Unit Tests
 
 Requires `htpasswd` command line utility installed. On Debian and Ubuntu Linux
 it is provided by [`apache2-utils`][apache2-utils] package that can be
@@ -120,8 +122,7 @@ To run tests use command similar to this:
     $ cabal configure --enable-tests && cabal build && cabal test
 
 
-Benchmarks
-----------
+## Benchmarks
 
 This package provides [Criterion][] benchmarks, to run them you can use
 something like:
@@ -136,8 +137,7 @@ command in above chain would look like:
 Where `benchmarks.html` is the name of [Criterion][] generated HTML file.
 
 
-Contributions
--------------
+## Contributions
 
 Contributions, pull requests and bug reports are welcome! Please don't be
 afraid to contact the author.
