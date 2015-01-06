@@ -2,6 +2,8 @@ Apache MD5
 ==========
 
 [![Hackage](http://img.shields.io/hackage/v/apache-md5.svg)][Hackage: apache-md5]
+[![Haskell Programming Language](https://img.shields.io/badge/language-Haskell-blue.svg)][Haskell.org]
+[![BSD3 License](http://img.shields.io/badge/license-BSD3-brightgreen.svg)][tl;dr Legal: BSD3]
 
 
 Description
@@ -138,21 +140,34 @@ Contributions
 -------------
 
 Contributions, pull requests and bug reports are welcome! Please don't be
-afraid to contact author using GitHub or by e-mail (see `.cabal` file for
-that).
+afraid to contact the author.
+
 
 
 [apache2-utils]:
     http://packages.debian.org/stable/apache2-utils
+    "apache2-utils Debian package"
 [apt-get-howto]:
     https://help.ubuntu.com/community/AptGet/Howto
+    "apt-get Howto"
 [cabal-install]:
     http://haskell.org/haskellwiki/Cabal-Install
+    "HaskellWiki: Cabal-install"
 [Criterion]:
     http://hackage.haskell.org/package/criterion
+    "criterion package on Hackage"
 [Hackage: apache-md5]:
     http://hackage.haskell.org/package/apache-md5
+    "apache-md5 package on Hackage"
+[Haskell.org]:
+    http://www.haskell.org
+    "The Haskell Programming Language"
 [HaskellWiki: How to install a Cabal package]:
     http://haskell.org/haskellwiki/Cabal/How_to_install_a_Cabal_package
+    "HaskellWiki: How to install a Cabal package"
 [libssl-dev]:
     http://packages.debian.org/lenny/libssl-dev
+    "libssl-dev Debian package"
+[tl;dr Legal: BSD3]:
+    https://tldrlegal.com/license/bsd-3-clause-license-%28revised%29
+    "BSD 3-Clause License (Revised)"
