@@ -20,8 +20,8 @@
 -- License:     BSD3
 -- Maintainer:  Peter Trško <peter.trsko@gmail.com>
 -- Stability:   Provisional
--- Portability: non-portable (BangPatterns, CPP, DeriveDataTypeable,
---              DeriveGeneric, ForeignFunctionInterface, NoImplicitPrelude)
+-- Portability: BangPatterns, CPP, DeriveDataTypeable, DeriveGeneric,
+--              ForeignFunctionInterface, NoImplicitPrelude
 --
 -- Internal and unsafe functions used for implementing Apache MD5
 -- hash algorithm.
@@ -107,7 +107,8 @@ type Password = ByteString
 
 -- | Apache MD5 hash salt. When constructing @.htpasswd@ file it is necessary
 -- for the salt to be consisting of octets from 'alpha64' \"set\". This newtype
--- along with @mkSalt@ smart constructor are here to ensure such invariant.
+-- along with 'Data.Digest.ApacheMD5.mkSalt' smart constructor are here to
+-- ensure such invariant.
 newtype Salt = Salt ByteString
   deriving
     ( Eq, Ord, Read, Show
@@ -124,7 +125,10 @@ instance NFData Salt
 #endif
 
 -- | Raw Apache MD5 implementation that is parametrized by MD5 implementation
--- and doesn't encode result in to base 64.
+-- and doesn't encode result in to Base64.
+--
+-- This module provides 'encode64' for producing Apache `htpasswd` compatible
+-- Base64 encoding.
 apacheMD5
     :: (ByteString -> ByteString)
     -- ^ MD5 hash function.
@@ -188,7 +192,7 @@ isAlpha64 = ((>= dot) <&&> (<= _9))
     _a = 97  -- 'a'
     _z = 122 -- 'z'
 
--- | Encode raw MD5 hash in to Base64-like encoding.
+-- | Encode raw MD5 hash in to Base64-like encoding used by Apache `htpasswd`.
 encode64 :: ByteString -> ByteString
 encode64 str = BS.pack $ concatMap (encode64' str)
   -- Index --.   ,-- Shift bits left this much

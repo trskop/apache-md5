@@ -5,8 +5,7 @@
 -- License:     BSD3
 -- Maintainer:  Peter Trško <peter.trsko@gmail.com>
 -- Stability:   Provisional
--- Portability: non-portable (NoImplicitPrelude, depends on non-portable
---              internal module)
+-- Portability: NoImplicitPrelude; depends on non-portable internal module
 --
 -- ApacheMD5 is one of the hash algorithms used by Apache HTTP server for basic
 -- authentication. It is Apache specific, but e.g. nginx supports this
@@ -34,18 +33,20 @@ module Data.Digest.ApacheMD5
     -- | Output of 'apacheMD5' function is not identical to what @htpasswd@
     -- does.  To create @htpasswd@-like entry one needs to do:
     --
-    -- > import Data.ByteString (ByteString)
-    -- > import qualified Data.ByteString.Char8 as C8 (concat, pack, singleton)
-    -- > import Data.Digest.ApacheMD5 (Salt, apacheMD5, unSalt)
-    -- >
-    -- > htpasswdEntry :: ByteString -> ByteString -> Salt -> ByteString
-    -- > htpasswdEntry username password salt = C8.concat
-    -- >     [ username
-    -- >     , C8.pack ":$apr1$"
-    -- >     , unSalt salt
-    -- >     , C8.singleton '$'
-    -- >     , apacheMD5 password salt
-    -- >     ]
+    -- @
+    -- import Data.ByteString (ByteString)
+    -- import qualified Data.ByteString.Char8 as C8 (concat, pack, singleton)
+    -- import Data.Digest.ApacheMD5 ('Salt', 'apacheMD5', 'unSalt')
+    --
+    -- htpasswdEntry :: ByteString -> ByteString -> 'Salt' -> ByteString
+    -- htpasswdEntry username password salt = C8.concat
+    --     [ username
+    --     , C8.pack \":$apr1$\"
+    --     , 'unSalt' salt
+    --     , C8.singleton \'$\'
+    --     , 'apacheMD5' password salt
+    --     ]
+    -- @
 
     -- * API Documentation
       apacheMD5
