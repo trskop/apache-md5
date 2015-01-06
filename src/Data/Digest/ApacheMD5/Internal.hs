@@ -16,7 +16,7 @@
 
 -- |
 -- Module:      Data.Digest.ApacheMD5.Internal
--- Copyright:   (c) 2009, 2010, 2012 - 2014 Peter Trško
+-- Copyright:   (c) 2009, 2010, 2012-2015 Peter Trško
 -- License:     BSD3
 -- Maintainer:  Peter Trško <peter.trsko@gmail.com>
 -- Stability:   Provisional
