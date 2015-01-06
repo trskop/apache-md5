@@ -5,7 +5,6 @@ module Main
 
 import Control.Applicative ((<$>))
 import Control.Monad (Monad((>>=), return), replicateM)
-import Data.Bool (Bool(True))
 import Data.Function ((.), ($))
 import Data.Int (Int)
 import Data.String (String)
@@ -15,8 +14,7 @@ import System.IO (IO)
 import Data.ByteString (ByteString)
 
 import Control.Monad.Random
-import Criterion.Config (Config(cfgPerformGC), defaultConfig, ljust)
-import Criterion.Main (bench, defaultMainWith, nf)
+import Criterion.Main (bench, defaultMain, nf)
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Char8 as C8
 
@@ -49,7 +47,7 @@ main = do
     (!inputData256, _) <- genData' 256
     (!inputData512, _) <- genData' 512
 
-    defaultMainWith defaultConfig{cfgPerformGC = ljust True} (return ())
+    defaultMain
         [ bench "Random passwords of length 8" $ test inputData8
         , bench "Random passwords of length 16" $ test inputData16
         , bench "Random passwords of length 32" $ test inputData32
