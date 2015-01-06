@@ -26,9 +26,9 @@ extra-source-files:
 
 
 flag pedantic
-  description:
-    Pass additional warning flags including -Werror to GHC during compilation.
+  description:        Pass additional warning flags to GHC.
   default:            False
+  manual:             True
 
 flag deepseq
   description:
@@ -54,10 +54,11 @@ library
   extra-libraries:      crypto
 
   ghc-options:          -Wall
-  if impl(ghc >= 6.8)
-    ghc-options:        -fwarn-tabs
   if flag(pedantic)
-    ghc-options:        -Werror
+    ghc-options:
+      -fwarn-tabs
+      -fwarn-implicit-prelude
+--    -Werror
 
 test-suite apache-md5-unit-tests
   hs-source-dirs:       src, test
@@ -92,10 +93,11 @@ test-suite apache-md5-unit-tests
   Extra-Libraries:      crypto
 
   ghc-options:          -Wall
-  if impl(ghc >= 6.8)
-    ghc-options:        -fwarn-tabs
   if flag(pedantic)
-    ghc-options:        -Werror
+    ghc-options:
+      -fwarn-tabs
+      -fwarn-implicit-prelude
+--    -Werror
 
 benchmark apache-md5-benchmark
   hs-source-dirs:       src, test
@@ -122,10 +124,11 @@ benchmark apache-md5-benchmark
 
   cpp-options:          -DWITH_deepseq
   ghc-options:          -Wall
-  if impl(ghc >= 6.8)
-    ghc-options:        -fwarn-tabs
   if flag(pedantic)
-    ghc-options:        -Werror
+    ghc-options:
+      -fwarn-tabs
+      -fwarn-implicit-prelude
+--    -Werror
 
 source-repository head
   type:                 git
