@@ -6,6 +6,8 @@ ghc:
   - 7.4
 
 install:
+  # Testes require htpasswd utility to be installed on the system.
+  - apt-get install apache2-utils
   - cabal install --only-dependencies --enable-tests --enable-benchmarks
 
 script:
