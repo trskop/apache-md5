@@ -1,0 +1,19 @@
+language: haskell
+
+ghc:
+  - 7.8
+  - 7.6
+  - 7.4
+
+install:
+  - cabal install --only-dependencies --enable-tests --enable-benchmarks
+
+script:
+  # Option -fpedantic turns on additional wornings in addition to -Wall.
+  - cabal configure --enable-tests --enable-benchmarks -fpedantic
+    && cabal build
+    && cabal test
+    && cabal bench
+
+  # Following line tests if sdist package is created correctly.
+  - cabal sdist && cabal install dist/endo-*.tar.gz
