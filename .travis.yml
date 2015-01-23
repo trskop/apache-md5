@@ -7,7 +7,7 @@ ghc:
 
 before_install:
   - sudo apt-get update -qq
-  # Testes require htpasswd utility to be installed on the system.
+  # Tests require htpasswd utility to be installed on the system.
   - sudo apt-get install -qq apache2-utils libssl-dev
 
 install:
