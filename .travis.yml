@@ -16,4 +16,4 @@ script:
     && cabal bench
 
   # Following line tests if sdist package is created correctly.
-  - cabal sdist && cabal install dist/endo-*.tar.gz
+  - cabal sdist && cabal install dist/apache-md5-*.tar.gz
