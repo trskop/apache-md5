@@ -80,7 +80,7 @@ test-suite apache-md5-unit-tests
     , transformers >= 0.3 && < 0.5
     -- }}} Distributed with GHC or Haskell Platform ---------------------------
 
-    , MonadRandom >= 0.2.0.1 && < 0.4
+    , MonadRandom >= 0.2.0.1 && < 0.5
     , HUnit >= 1.2 && < 2
       -- ^ Same constraints as test-framework-hunit
     , test-framework >= 0.8 && < 1
@@ -112,12 +112,12 @@ benchmark apache-md5-benchmark
     -- {{{ Dependencies of apache-md5 library ---------------------------------
       base >= 4 && < 5
     , bytestring >= 0.10 && < 0.11
-    , deepseq >= 1.1.0.0
+    , deepseq >= 1.1.0.0 && < 2
     -- ^ Same minimal bound as criterion has since version 0.4.0.
     -- }}} Dependencies of apache-md5 library ---------------------------------
 
     , criterion >= 1.0.0.0 && < 2
-    , MonadRandom >= 0.2.0.1 && < 0.4
+    , MonadRandom >= 0.2.0.1 && < 0.5
 
   includes:             openssl/md5.h
   extra-libraries:      crypto
