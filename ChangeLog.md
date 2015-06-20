@@ -1,5 +1,12 @@
 # ChangeLog / ReleaseNotes
 
+## Version 0.6.1.3
+
+* Minor documentation changes. (change)
+* Making deepseq dependency of library in sync with benchmark dependency.
+  Version <http://hackage.haskell.org/package/apache-md5-0.6.1.2 0.6.1.2> on
+  Hackage was modified to include this change already. (change)
+
 
 ## Version 0.6.1.2
 
