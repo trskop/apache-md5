@@ -1,5 +1,5 @@
 name:                 apache-md5
-version:              0.6.1.1
+version:              0.6.1.2
 synopsis:             Apache specific MD5 digest algorighm.
 description:
   Haskell implementation of Apache HTTP server specific MD5 digest algorithm
@@ -137,4 +137,4 @@ source-repository head
 source-repository this
   type:                 git
   location:             git://github.com/trskop/apache-md5.git
-  tag:                  v0.6.1.1
+  tag:                  v0.6.1.2

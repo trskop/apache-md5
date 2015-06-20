@@ -1,6 +1,14 @@
 # ChangeLog / ReleaseNotes
 
 
+## Version 0.6.1.2
+
+* Bumping up dependency on [MonadRandom][] to include `0.4`. (change, affects
+  only benchmark and test-suite)
+* Adding sensible upper bound to [deepseq][] package. (change, affects
+  only benchmark)
+
+
 ## Version 0.6.1.1
 
 * Cleanup of version dependencies, most importantly:
@@ -63,3 +71,9 @@ Release date: **2013-07-26 20:29 +0200**
 [Hackage]:
   http://hackage.haskell.org/
   "HackageDB (or just Hackage) is a collection of releases of Haskell packages."
+[MonadRandom]:
+  http://hackage.haskell.org/package/MonadRandom
+  "Hackage: MonadRandom package."
+[deepseq]:
+  http://hackage.haskell.org/package/deepseq
+  "Hackage: deepseq package."
