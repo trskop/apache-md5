@@ -5,8 +5,7 @@ description:
   Haskell implementation of Apache HTTP server specific MD5 digest algorithm
   that uses OpenSSL @MD5()@ function.
   .
-  For usage example see "Data.Digest.ApacheMD5" module or
-  <https://github.com/trskop/apache-md5/blob/master/README.md GitHub README>.
+  For usage example see "Data.Digest.ApacheMD5" module or <readme README> file.
 
 homepage:             https://github.com/trskop/apache-md5
 bug-reports:          https://github.com/trskop/apache-md5/issues
@@ -47,7 +46,7 @@ library
 
   if flag(deepseq)
     cpp-options:        -DWITH_deepseq
-    build-depends:      deepseq >= 1.1.0.0
+    build-depends:      deepseq >= 1.1.0.0 && < 2
     -- Same minimal bound as criterion has since version 0.4.0.
 
   includes:             openssl/md5.h
