@@ -7,6 +7,8 @@
   only benchmark and test-suite)
 * Adding sensible upper bound to [deepseq][] package. (change, affects
   only benchmark)
+* Uploaded to [Hackage][]:
+  <http://hackage.haskell.org/package/apache-md5-0.6.1.2>
 
 
 ## Version 0.6.1.1
