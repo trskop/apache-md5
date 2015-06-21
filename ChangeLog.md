@@ -6,6 +6,8 @@
 * Bugfix: GHC 7.4 build fails due to missing GHC.Generics. See
   <https://github.com/trskop/apache-md5/pull/1 pull request from Adam Bergmark>
   for details. (change)
+* Uploaded to [Hackage][]:
+  <http://hackage.haskell.org/package/apache-md5-0.6.1.4>
 
 
 ## Version 0.6.1.3
