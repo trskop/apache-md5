@@ -4,7 +4,7 @@
 ## Version 0.6.1.4
 
 * Bugfix: GHC 7.4 build fails due to missing GHC.Generics. See
-  <https://github.com/trskop/apache-md5/pull/1 pull request from Adam Bergmark>
+  [pull request from Adam Bergmark](https://github.com/trskop/apache-md5/pull/1)
   for details. (change)
 * Uploaded to [Hackage][]:
   <http://hackage.haskell.org/package/apache-md5-0.6.1.4>
@@ -14,7 +14,7 @@
 
 * Minor documentation changes. (change)
 * Making deepseq dependency of library in sync with benchmark dependency.
-  Version <http://hackage.haskell.org/package/apache-md5-0.6.1.2 0.6.1.2> on
+  Version [0.6.1.2](http://hackage.haskell.org/package/apache-md5-0.6.1.2) on
   Hackage was modified to include this change already. (change)
 
 
