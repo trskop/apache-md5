@@ -1,5 +1,13 @@
 # ChangeLog / ReleaseNotes
 
+
+## Version 0.6.1.4
+
+* Bugfix: GHC 7.4 build fails due to missing GHC.Generics. See
+  <https://github.com/trskop/apache-md5/pull/1 pull request from Adam Bergmark>
+  for details. (change)
+
+
 ## Version 0.6.1.3
 
 * Minor documentation changes. (change)
