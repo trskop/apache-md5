@@ -10,13 +10,13 @@ description:
 homepage:             https://github.com/trskop/apache-md5
 bug-reports:          https://github.com/trskop/apache-md5/issues
 license:              BSD3
-license-File:         LICENSE
-copyright:            (c) 2009, 2010, 2012-2015 Peter Trško
+license-file:         LICENSE
+copyright:            (c) 2009, 2010, 2012-2015, Peter Trško
 author:               Peter Trško <peter.trsko@gmail.com>
 maintainer:           peter.trsko@gmail.com
 category:             Data, Cryptography
-build-Type:           Custom
-cabal-Version:        >= 1.9.1
+build-type:           Custom
+cabal-version:        >= 1.9.1
   -- Benchmark section is available since Cabal >= 1.9.1
 
 extra-source-files:
@@ -36,7 +36,7 @@ flag deepseq
   default:            False
 
 library
-  hs-Source-Dirs:       src
+  hs-source-dirs:       src
   exposed-modules:
       Data.Digest.ApacheMD5
     , Data.Digest.ApacheMD5.Internal
@@ -45,6 +45,7 @@ library
     , bytestring >= 0.10 && < 0.11
 
   if impl(ghc < 7.6)
+    -- GHC.Generics moved from ghc-prim to base with GHC 7.6 release.
     build-depends:      ghc-prim
 
   if flag(deepseq)
@@ -92,10 +93,11 @@ test-suite apache-md5-unit-tests
       -- ^ Lower versions have more restrictive bounds on test-framework.
 
   if impl(ghc < 7.6)
+    -- GHC.Generics moved from ghc-prim to base with GHC 7.6 release.
     build-depends:      ghc-prim
 
-  Includes:             openssl/md5.h
-  Extra-Libraries:      crypto
+  includes:             openssl/md5.h
+  extra-libraries:      crypto
 
   ghc-options:          -Wall
   if flag(pedantic)
@@ -120,11 +122,13 @@ benchmark apache-md5-benchmark
     , deepseq >= 1.1.0.0 && < 2
     -- ^ Same minimal bound as criterion has since version 0.4.0.
     -- }}} Dependencies of apache-md5 library ---------------------------------
+    -- }}} Distributed with GHC or Haskell Platform ---------------------------
 
     , criterion >= 1.0.0.0 && < 2
     , MonadRandom >= 0.2.0.1 && < 0.5
 
   if impl(ghc < 7.6)
+    -- GHC.Generics moved from ghc-prim to base with GHC 7.6 release.
     build-depends:      ghc-prim
 
   includes:             openssl/md5.h
