@@ -1,6 +1,13 @@
 # ChangeLog / ReleaseNotes
 
 
+## Version 0.6.1.5
+
+* Bumped upper bound of [process][] constraint. This package is used only by
+  test suite. (change)
+* Small cleanups not affecting library code.
+
+
 ## Version 0.6.1.4
 
 * Bugfix: GHC 7.4 build fails due to missing GHC.Generics. See
@@ -13,7 +20,7 @@
 ## Version 0.6.1.3
 
 * Minor documentation changes. (change)
-* Making deepseq dependency of library in sync with benchmark dependency.
+* Making [deepseq[] dependency of library in sync with benchmark dependency.
   Version [0.6.1.2](http://hackage.haskell.org/package/apache-md5-0.6.1.2) on
   Hackage was modified to include this change already. (change)
 
@@ -92,7 +99,10 @@ Release date: **2013-07-26 20:29 +0200**
   "HackageDB (or just Hackage) is a collection of releases of Haskell packages."
 [MonadRandom]:
   http://hackage.haskell.org/package/MonadRandom
-  "Hackage: MonadRandom package."
+  "MonadRandom package on Hackage"
 [deepseq]:
   http://hackage.haskell.org/package/deepseq
-  "Hackage: deepseq package."
+  "deepseq package on Hackage"
+[process]:
+  https://hackage.haskell.org/package/process
+  "process package on Hackage"
