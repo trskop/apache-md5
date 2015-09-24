@@ -51,6 +51,18 @@ module Data.Digest.ApacheMD5
     -- * API Documentation
       apacheMD5
     , Password
+
+    -- ** Salt
+    --
+    -- | 'Salt' is a byte sequence that contains one or more characters from
+    -- 'Internal.alpha64', i.e. the same characters used to encode hash in to
+    -- printable form. Reason for using 'Internal.alpha64' is compatibility
+    -- with Apache implementation. Some implementations (including Apache
+    -- implementation) are capable to verify passwords hashed with salt that
+    -- contains characters outside of this set. There are some hard
+    -- restrictions, e.g. that \'$\' character can not be used, since it is
+    -- reserved as a field separator. Overall it is safer to stick with
+    -- 'Integral.alpha64'.
     , Salt
     , mkSalt
     , unSalt
@@ -72,11 +84,10 @@ import qualified Data.Digest.ApacheMD5.Internal as Internal
     , md5BS
     )
 
-
 -- | Smart constructor for 'Salt'. It tests that provided 'ByteString' is not
 -- empty and that all its octets are members of alphabet used for base 64
--- encoding 'Data.Digest.ApacheMD5.Internal.alpha64' and it uses
--- 'Internal.isAlpha64' predicate to do so.
+-- encoding of final hash ('Internal.alpha64') and it uses 'Internal.isAlpha64'
+-- predicate to do so.
 mkSalt :: ByteString -> Maybe Salt
 mkSalt str
   | isValidSalt = Just $ Salt str
