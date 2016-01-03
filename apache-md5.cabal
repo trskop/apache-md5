@@ -86,11 +86,14 @@ test-suite unit-tests
     , MonadRandom >= 0.2.0.1 && < 0.5
     , HUnit >= 1.2 && < 2
       -- ^ Same constraints as test-framework-hunit
+--  , QuickCheck >=2.7 && < 2.9
     , test-framework >= 0.8 && < 1
       -- ^ Same constraint as test-framework-skip, other packages that
       -- depend on it have less restrictive bounds.
     , test-framework-hunit >= 0.2.6 && < 1
       -- ^ Lower versions have more restrictive bounds on test-framework.
+    , test-framework-quickcheck2 >=0.3.0.3 && < 0.4
+      -- ^ Version 0.3.0.3 is the first one that works with QuickCheck >=2.7.
 
   if impl(ghc < 7.6)
     -- GHC.Generics moved from ghc-prim to base with GHC 7.6 release.
