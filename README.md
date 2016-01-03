@@ -139,6 +139,12 @@ command in above chain would look like:
 Where `benchmarks.html` is the name of [Criterion][] generated HTML file.
 
 
+License
+-------
+
+The BSD 3-Clause License, see [LICENSE][] file for details.
+
+
 ## Contributions
 
 Contributions, pull requests and bug reports are welcome! Please don't be
@@ -170,6 +176,9 @@ afraid to contact the author.
 [libssl-dev]:
     http://packages.debian.org/lenny/libssl-dev
     "libssl-dev Debian package"
+[LICENSE]:
+  https://github.com/trskop/apache-md5/blob/master/LICENSE
+  "License of apache-md5 package."
 [tl;dr Legal: BSD3]:
     https://tldrlegal.com/license/bsd-3-clause-license-%28revised%29
     "BSD 3-Clause License (Revised)"
