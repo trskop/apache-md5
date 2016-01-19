@@ -26,6 +26,10 @@ matrix:
 
 before_install:
   - export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$PWD/test/apache-htpasswd:$PATH
+
+  # Package apache2-utils is not whitelisted, but it was quite easy to separate
+  # htpassd source code and compile it for the purpose of unit testing
+  # apache-md5. Note that it had to be included in the PATH variable.
   - chmod +x test/apache-htpasswd/build.sh
   - ./test/apache-htpasswd/build.sh
 
