@@ -3,34 +3,35 @@
 
 ## Version 0.6.1.5
 
-* Bumped upper bound of [process][] constraint. This package is used only by
-  test suite. (change)
-* Small cleanups not affecting library code.
+* Bumped upper bound of [process][] dependency. (**minor change**, test-suite
+  only)
+* Bumped upper bound of [transformers][] dependency. (**minor change**,
+  test-suite only)
 
 
 ## Version 0.6.1.4
 
 * Bugfix: GHC 7.4 build fails due to missing GHC.Generics. See
   [pull request from Adam Bergmark](https://github.com/trskop/apache-md5/pull/1)
-  for details. (change)
+  for details. (**change**)
 * Uploaded to [Hackage][]:
   <http://hackage.haskell.org/package/apache-md5-0.6.1.4>
 
 
 ## Version 0.6.1.3
 
-* Minor documentation changes. (change)
+* Minor documentation changes. (**minor change**)
 * Making [deepseq[] dependency of library in sync with benchmark dependency.
   Version [0.6.1.2](http://hackage.haskell.org/package/apache-md5-0.6.1.2) on
-  Hackage was modified to include this change already. (change)
+  Hackage was modified to include this change already. (**change**)
 
 
 ## Version 0.6.1.2
 
-* Bumping up dependency on [MonadRandom][] to include `0.4`. (change, affects
-  only benchmark and test-suite)
-* Adding sensible upper bound to [deepseq][] package. (change, affects
-  only benchmark)
+* Bumping up dependency on [MonadRandom][] to include `0.4`. (**change**,
+  benchmark and test-suite only)
+* Adding sensible upper bound to [deepseq][] package. (**change**, benchmark
+  only)
 * Uploaded to [Hackage][]:
   <http://hackage.haskell.org/package/apache-md5-0.6.1.2>
 
@@ -38,7 +39,7 @@
 ## Version 0.6.1.1
 
 * Cleanup of version dependencies, most importantly:
-    * Bumped transformers dependency from `< 0.4` to `0.5`.
+    * Bumped [transformers][] dependency from `< 0.4` to `0.5`.
     * Bumped criterion minimal version to 1.0.0.0. This required update of
       benchmarking code.
 * Documentation updates.
@@ -76,10 +77,10 @@ Release date: **2013-07-27 10:38 +0200**
 
 * Minor release with mostly documentation updates.
 * Introducing `example.hs` that creates htpasswd like entry and prints it to
-  stdout. (new)
+  stdout. (**new**)
 * Updated `README.md` with reference to [Hackage][] and example mentioned
   above.
-* Introducing this ChangeLog / ReleaseNotes file. (new)
+* Introducing this ChangeLog / ReleaseNotes file. (**new**)
 * Clean up of benchmark dependencies.
 * Uploaded to [Hackage][]:
   <http://hackage.haskell.org/package/apache-md5-0.5.0.1>
@@ -106,3 +107,6 @@ Release date: **2013-07-26 20:29 +0200**
 [process]:
   https://hackage.haskell.org/package/process
   "process package on Hackage"
+[transformers]:
+  https://hackage.haskell.org/package/transformers
+  "transformers package on Hackage"

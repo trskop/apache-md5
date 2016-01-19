@@ -80,7 +80,7 @@ test-suite unit-tests
 
     , process > 1.1.0.1 && < 1.4
     , random >= 1.0.1.1 && < 2
-    , transformers >= 0.3 && < 0.5
+    , transformers >= 0.3 && < 0.6
     -- }}} Distributed with GHC or Haskell Platform ---------------------------
 
     , MonadRandom >= 0.2.0.1 && < 0.5
