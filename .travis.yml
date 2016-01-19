@@ -37,10 +37,14 @@ install:
 
 script:
   # Option -fpedantic turns on additional wornings in addition to -Wall.
-  - cabal configure --enable-tests --enable-benchmarks  -fpedantic
-  - cabal build
-  - cabal test
-  - cabal bench
+  #
+  # For some reason splitting this step in to configure, build, test and
+  # benchmark failed on some combinations of GHC and Cabal (GHC 7.10.3 & Cabal
+  # 1.22). Following is the error message:
+  # 
+  #   cabal: You need to re-run the 'configure' command. The version of Cabal
+  #   being used has changed (was Cabal-1.22.5.0, now Cabal-1.22.4.0).
+  - cabal install --enable-tests --enable-benchmarks -fpedantic
 
   # Following line tests if sdist package is created correctly.
   - cabal sdist | sed -rn '$s/^[^:]+:\s+//p' | xargs cabal install --enable-tests --enable-benchmarks
