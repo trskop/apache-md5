@@ -119,6 +119,9 @@ installed using `apt-get`:
 For more see `apt-get(8)` manual page or e.g. [Ubuntu Documentation: AptGet
 Howto][apt-get-howto].
 
+There is also a possibility to compile it your self, see
+<test/apache-htpasswd/README.md> for more information on how to do that.
+
 To run tests use command similar to this:
 
     $ cabal configure --enable-tests && cabal build && cabal test
