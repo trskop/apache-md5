@@ -110,8 +110,9 @@ Compiling and running above example:
 
 ## Unit Tests
 
-Requires `htpasswd` command line utility installed. On Debian and Ubuntu Linux
-it is provided by [`apache2-utils`][apache2-utils] package that can be
+Requires `htpasswd` command line utility installed. It is used as a reference
+implementation of Apache MD5 algorithm by unit tests. On Debian and Ubuntu
+Linux it is provided by [`apache2-utils`][apache2-utils] package that can be
 installed using `apt-get`:
 
     $ apt-get install apache2-utils
@@ -119,8 +120,8 @@ installed using `apt-get`:
 For more see `apt-get(8)` manual page or e.g. [Ubuntu Documentation: AptGet
 Howto][apt-get-howto].
 
-There is also a possibility to compile it your self, see
-<test/apache-htpasswd/README.md> for more information on how to do that.
+There is also a possibility to compile Apache `htpasswd` your self, see
+[test/apache-htpasswd/README.md][] for more information on how to do that.
 
 To run tests use command similar to this:
 
@@ -182,6 +183,9 @@ afraid to contact the author.
 [LICENSE]:
   https://github.com/trskop/apache-md5/blob/master/LICENSE
   "License of apache-md5 package."
+[test/apache-htpasswd/README.md]:
+  https://github.com/trskop/apache-md5/blob/master/test/apache-htpasswd/README.md
+  "Compile your own Apache htpasswd binary to use as a reference implementation."
 [tl;dr Legal: BSD3]:
     https://tldrlegal.com/license/bsd-3-clause-license-%28revised%29
     "BSD 3-Clause License (Revised)"
