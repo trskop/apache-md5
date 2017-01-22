@@ -16,12 +16,11 @@
 
 -- |
 -- Module:      Data.Digest.ApacheMD5.Internal
--- Copyright:   (c) 2009, 2010, 2012-2015 Peter Trško
+-- Copyright:   (c) 2009, 2010, 2012-2015, 2017 Peter Trško
 -- License:     BSD3
 -- Maintainer:  Peter Trško <peter.trsko@gmail.com>
 -- Stability:   Provisional
--- Portability: BangPatterns, CPP, DeriveDataTypeable, DeriveGeneric,
---              ForeignFunctionInterface, NoImplicitPrelude
+-- Portability: GHC specific language extensions; linking against OpenSSL.
 --
 -- Internal and unsafe functions used for implementing Apache MD5
 -- hash algorithm.
@@ -216,7 +215,7 @@ encode64 str = BS.pack $ concatMap (encode64' str)
         to64 n . foldl1 (.|.) . (`map` xs) $ \ (!i, !t) ->
             conv (s `BS.index` i) `shiftL` t
 
-    conv :: (Integral i, Num n, Integral n, Bits n) => i -> n
+    conv :: (Integral i, Integral n) => i -> n
     conv = fromInteger . toInteger
 
     to64 :: Int -> Word32 -> [Word8]
