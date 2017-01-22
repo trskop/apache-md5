@@ -11,12 +11,12 @@ import Data.String (String)
 import Data.Tuple (uncurry)
 import System.IO (IO)
 
-import Data.ByteString (ByteString)
-
-import Control.Monad.Random
+import Control.Monad.Random (RandT, getRandomR, runRandT)
 import Criterion.Main (bench, defaultMain, nf)
+import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Char8 as C8
+import System.Random (StdGen, getStdGen)
 
 import Data.Digest.ApacheMD5 (apacheMD5)
 import Data.Digest.ApacheMD5.Internal (Salt(Salt), alpha64)

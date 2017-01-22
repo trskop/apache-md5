@@ -1,12 +1,15 @@
 # ChangeLog / ReleaseNotes
 
 
-## Version 0.6.1.5
+## Version 0.6.2.0
 
 * Bumped upper bound of [process][] dependency. (**minor change**, test-suite
   only)
 * Bumped upper bound of [transformers][] dependency. (**minor change**,
   test-suite only)
+* Bumped upper bound of [MonadRandom][] dependency. (**minor change**,
+  test-suite, and benchmarks only)
+* Small cleanups not affecting library code. (**minor change**)
 
 
 ## Version 0.6.1.4

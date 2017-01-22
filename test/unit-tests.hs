@@ -12,18 +12,29 @@ import Control.Monad
     , void
     , when
     )
-import Control.Monad.IO.Class (liftIO)
-import Control.Monad.Random
-import qualified Data.ByteString.Char8 as C8
 import Data.Eq (Eq((==), (/=)))
 import Data.Function ((.), ($), on)
 import Data.Int (Int)
-import Data.List ((++), break, concat, drop, dropWhile, takeWhile, unlines)
+import Data.List
+    ( (++)
+    , break
+    , concat
+    , drop
+    , dropWhile
+    , takeWhile
+    , unlines
+    )
 import Data.String (String)
 import System.Exit (ExitCode(..))
 import System.IO (IO)
+
+import Control.Monad.IO.Class (liftIO)
+import Control.Monad.Random (RandT, getRandomR, runRandT)
+import qualified Data.ByteString.Char8 as C8 (pack, unpack)
 import System.Process (readProcessWithExitCode)
-import Test.Framework
+import System.Random (StdGen, getStdGen)
+
+import Test.Framework (defaultMain)
 import Test.Framework.Providers.HUnit (testCase)
 import Test.HUnit (Assertion, assertEqual)
 

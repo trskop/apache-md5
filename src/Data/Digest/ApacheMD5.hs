@@ -84,6 +84,7 @@ import qualified Data.Digest.ApacheMD5.Internal as Internal
     , md5BS
     )
 
+
 -- | Smart constructor for 'Salt'. It tests that provided 'ByteString' is not
 -- empty and that all its octets are members of alphabet used for base 64
 -- encoding of final hash ('Internal.alpha64') and it uses 'Internal.isAlpha64'
