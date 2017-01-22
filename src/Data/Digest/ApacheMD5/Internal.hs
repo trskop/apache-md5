@@ -212,7 +212,7 @@ encode64 str = BS.pack $ concatMap (encode64' str)
   where
     encode64' :: ByteString -> (Int, [(Int, Int)]) -> [Word8]
     encode64' !s (!n, xs) =
-        to64 n . foldl1 (.|.) . (`map` xs) $ \ (!i, !t) ->
+        to64 n . foldl1 (.|.) . (`map` xs) $ \(!i, !t) ->
             conv (s `BS.index` i) `shiftL` t
 
     conv :: (Integral i, Integral n) => i -> n
@@ -238,5 +238,5 @@ md5DigestLength = 16
 
 -- | Thin Haskell wrapper around OpenSSL's MD5 hash function.
 md5BS :: ByteString -> ByteString
-md5BS bs = unsafePerformIO . BS.unsafeUseAsCStringLen bs $ \ (ptr, len) ->
+md5BS bs = unsafePerformIO . BS.unsafeUseAsCStringLen bs $ \(ptr, len) ->
     BS.create md5DigestLength $ void . c_md5 ptr (fromIntegral len)
