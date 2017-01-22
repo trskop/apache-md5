@@ -90,7 +90,7 @@ test-suite unit-tests
       -- depend on it have less restrictive bounds.
     , test-framework-hunit >= 0.2.6 && < 1
       -- ^ Lower versions have more restrictive bounds on test-framework.
-    , test-framework-quickcheck2 >=0.3.0.3 && < 0.4
+--  , test-framework-quickcheck2 >=0.3.0.3 && < 0.4
       -- ^ Version 0.3.0.3 is the first one that works with QuickCheck >=2.7.
     , transformers >= 0.3 && < 0.6
 
