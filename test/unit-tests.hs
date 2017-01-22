@@ -5,6 +5,7 @@ module Main (main)
 import Prelude (Show(show), error)
 
 import Control.Arrow (Arrow(second))
+import Control.Monad.IO.Class (liftIO)
 import Control.Monad
     ( Monad((>>=), return)
     , replicateM
@@ -28,7 +29,6 @@ import Data.String (String)
 import System.Exit (ExitCode(..))
 import System.IO (IO)
 
-import Control.Monad.IO.Class (liftIO)
 import Control.Monad.Random (RandT, getRandomR, runRandT)
 import qualified Data.ByteString.Char8 as C8 (pack, unpack)
 import System.Process (readProcessWithExitCode)
