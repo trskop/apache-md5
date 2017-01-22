@@ -95,4 +95,7 @@ cabal.project.local
 # Don't provide default stack.yaml, let users decide if they want one.
 stack.yaml
 
+# Ignore criterion HTML output.
+*.html
+
 # {{{ Local ###################################################################
