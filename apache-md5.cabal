@@ -1,5 +1,5 @@
 name:                 apache-md5
-version:              0.6.2.0
+version:              0.6.3.0
 synopsis:             Apache specific MD5 digest algorighm.
 description:
   Haskell implementation of Apache HTTP server specific MD5 digest algorithm
@@ -11,18 +11,17 @@ homepage:             https://github.com/trskop/apache-md5
 bug-reports:          https://github.com/trskop/apache-md5/issues
 license:              BSD3
 license-file:         LICENSE
-copyright:            (c) 2009, 2010, 2012-2017, Peter Trško
+copyright:            (c) 2009, 2010, 2012-2018, Peter Trško
 author:               Peter Trško <peter.trsko@gmail.com>
 maintainer:           peter.trsko@gmail.com
 category:             Data, Cryptography
-build-type:           Custom
+build-type:           Simple
 cabal-version:        >= 1.9.1
   -- Benchmark section is available since Cabal >= 1.9.1
 
 extra-source-files:
     ChangeLog.md
   , README.md
-  , example.hs
 
 flag pedantic
   description:        Pass additional warning flags to GHC.
@@ -34,6 +33,12 @@ flag deepseq
     Define instance of NFData for Salt newtype. This dependency is enforced for
     benchmark.
   default:            False
+  manual:             False
+
+flag examples
+  description:        Build example(s).
+  default:            False
+  manual:             True
 
 library
   hs-source-dirs:       src
@@ -58,18 +63,18 @@ library
 
   ghc-options:          -Wall
   if flag(pedantic)
-    ghc-options:
-      -fwarn-tabs
-      -fwarn-implicit-prelude
---    -Werror
+    if impl(ghc >=8)
+      ghc-options:
+        -Wimplicit-prelude
+    else
+      ghc-options:
+        -fwarn-tabs
+        -fwarn-implicit-prelude
 
 test-suite unit-tests
-  hs-source-dirs:       src, test
+  hs-source-dirs:       test
   type:                 exitcode-stdio-1.0
   main-is:              unit-tests.hs
-  other-modules:
-      Data.Digest.ApacheMD5
-    , Data.Digest.ApacheMD5.Internal
 
   build-depends:
     -- {{{ Dependencies of apache-md5 library ---------------------------------
@@ -82,7 +87,7 @@ test-suite unit-tests
     , HUnit >= 1.2 && < 2
       -- ^ Same constraints as test-framework-hunit
     , MonadRandom >= 0.2.0.1 && < 0.6
-    , process > 1.1.0.1 && < 1.5
+    , process > 1.1.0.1 && < 1.7
 --  , QuickCheck >=2.7 && < 2.9
     , random >= 1.0.1.1 && < 2
     , test-framework >= 0.8 && < 1
@@ -94,6 +99,8 @@ test-suite unit-tests
       -- ^ Version 0.3.0.3 is the first one that works with QuickCheck >=2.7.
     , transformers >= 0.3 && < 0.6
 
+    , apache-md5
+
   if impl(ghc < 7.6)
     -- GHC.Generics moved from ghc-prim to base with GHC 7.6 release.
     build-depends:      ghc-prim
@@ -103,18 +110,18 @@ test-suite unit-tests
 
   ghc-options:          -Wall
   if flag(pedantic)
-    ghc-options:
-      -fwarn-tabs
-      -fwarn-implicit-prelude
---    -Werror
+    if impl(ghc >=8)
+      ghc-options:
+        -fwarn-tabs
+        -fwarn-implicit-prelude
+    else
+      ghc-options:
+        -Wimplicit-prelude
 
 benchmark benchmark
-  hs-source-dirs:       src, test
+  hs-source-dirs:       test
   type:                 exitcode-stdio-1.0
   main-is:              benchmark.hs
-  other-modules:
-      Data.Digest.ApacheMD5
-    , Data.Digest.ApacheMD5.Internal
 
   build-depends:
     -- {{{ Dependencies of apache-md5 library ---------------------------------
@@ -130,6 +137,8 @@ benchmark benchmark
     , MonadRandom >= 0.2.0.1 && < 0.6
     , random >= 1.0.1.1 && < 2
 
+    , apache-md5
+
   if impl(ghc < 7.6)
     -- GHC.Generics moved from ghc-prim to base with GHC 7.6 release.
     build-depends:      ghc-prim
@@ -140,10 +149,40 @@ benchmark benchmark
   cpp-options:          -DWITH_deepseq
   ghc-options:          -Wall
   if flag(pedantic)
-    ghc-options:
-      -fwarn-tabs
-      -fwarn-implicit-prelude
---    -Werror
+    if impl(ghc >=8)
+      ghc-options:
+        -Wimplicit-prelude
+    else
+      ghc-options:
+        -fwarn-tabs
+        -fwarn-implicit-prelude
+
+executable apache-md5-example
+  if flag(examples)
+    buildable:          True
+  else
+    buildable:          False
+
+  hs-source-dirs:       example
+  main-is:              Main.hs
+
+  build-depends:
+      base >= 4 && < 5
+    , bytestring >= 0.10 && < 0.11
+    , MonadRandom >= 0.2.0.1 && < 0.6
+    , random >= 1.0.1.1 && < 2
+
+    , apache-md5
+
+  ghc-options:          -Wall
+  if flag(pedantic)
+    if impl(ghc >=8)
+      ghc-options:
+        -Wimplicit-prelude
+    else
+      ghc-options:
+        -fwarn-tabs
+        -fwarn-implicit-prelude
 
 source-repository head
   type:                 git
@@ -152,4 +191,4 @@ source-repository head
 source-repository this
   type:                 git
   location:             git://github.com/trskop/apache-md5.git
-  tag:                  v0.6.1.4
+  tag:                  v0.6.3.0

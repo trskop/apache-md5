@@ -37,9 +37,18 @@ For details see [HaskellWiki: How to install a Cabal package][].
 
 ### Building Options
 
-* `-fpedantic` (disabled by default)
+* `pedantic` (disabled by default)
 
-  Pass additional warning flags to GHC.
+    Pass additional warning flags to GHC.
+
+* `deepseq` (disabled by default)
+
+    Define instance of `NFData` for `Salt` newtype. This dependency is enforced
+    for benchmark.
+
+* `examples` (disabled by default)
+
+    Build example(s).
 
 
 ## Example
